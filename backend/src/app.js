@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const metrics = require('./metrics');
+const { authenticate, requireRole } = require('./auth');
+const { salesStats } = require('./stats');
 const authRoutes = require('./routes/auth');
 const menuRoutes = require('./routes/menu');
 const orderRoutes = require('./routes/orders');
@@ -36,6 +38,11 @@ function createApp({ store, cache, jwtSecret = 'dev-only-secret', version = 'dev
   app.use('/api/auth', authRoutes(deps));
   app.use('/api/menu', menuRoutes(deps));
   app.use('/api/orders', orderRoutes(deps));
+
+  app.get('/api/admin/stats', authenticate(jwtSecret), requireRole('admin'), async (req, res) => {
+    const since = new Date(Date.now() - 8 * 86400000);
+    res.json(salesStats(await store.listOrdersSince(since)));
+  });
 
   app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
 

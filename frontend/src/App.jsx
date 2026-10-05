@@ -6,6 +6,7 @@ import Menu from './pages/Menu'
 import MyOrders from './pages/MyOrders'
 import TrackOrder from './pages/TrackOrder'
 import Kitchen from './pages/Kitchen'
+import AdminDashboard from './pages/AdminDashboard'
 import AdminMenu from './pages/AdminMenu'
 
 const NAV = {
@@ -15,6 +16,7 @@ const NAV = {
   ],
   staff: [['/kitchen', 'Kitchen queue']],
   admin: [
+    ['/admin', 'Sales'],
     ['/admin/menu', 'Menu'],
     ['/kitchen', 'Kitchen queue'],
   ],
@@ -66,6 +68,7 @@ export default function App() {
           <Route path="/orders" element={<RequireRole roles={['student']}><MyOrders /></RequireRole>} />
           <Route path="/orders/:id" element={<RequireRole roles={['student']}><TrackOrder /></RequireRole>} />
           <Route path="/kitchen" element={<RequireRole roles={['staff', 'admin']}><Kitchen /></RequireRole>} />
+          <Route path="/admin" element={<RequireRole roles={['admin']}><AdminDashboard /></RequireRole>} />
           <Route path="/admin/menu" element={<RequireRole roles={['admin']}><AdminMenu /></RequireRole>} />
           <Route path="*" element={<Navigate to={homeFor(user)} replace />} />
         </Routes>
