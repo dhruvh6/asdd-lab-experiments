@@ -48,7 +48,7 @@ export function useAuth() {
 // oxlint-disable-next-line react/only-export-components
 export function homeFor(user) {
   if (!user) return '/login'
-  if (user.role === 'admin') return '/kitchen'
+  if (user.role === 'admin') return '/admin'
   if (user.role === 'staff') return '/kitchen'
   return '/'
 }
