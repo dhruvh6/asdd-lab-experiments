@@ -58,6 +58,11 @@ module.exports = function orderRoutes({ store, cache, jwtSecret }) {
     res.status(201).json(order);
   });
 
+  // CE-9: a student's own order history.
+  router.get('/mine', requireRole('student'), async (req, res) => {
+    res.json(await store.listOrdersByUser(req.user.id));
+  });
+
   // CE-4: the live kitchen queue.
   router.get('/queue', kitchen, async (req, res) => {
     res.json(await store.listActiveOrders());

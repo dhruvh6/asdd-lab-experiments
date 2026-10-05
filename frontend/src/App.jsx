@@ -3,11 +3,15 @@ import { homeFor, useAuth } from './auth'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Menu from './pages/Menu'
+import MyOrders from './pages/MyOrders'
 import TrackOrder from './pages/TrackOrder'
 import Kitchen from './pages/Kitchen'
 
 const NAV = {
-  student: [['/', 'Menu']],
+  student: [
+    ['/', 'Menu'],
+    ['/orders', 'My orders'],
+  ],
   staff: [['/kitchen', 'Kitchen queue']],
   admin: [['/kitchen', 'Kitchen queue']],
 }
@@ -55,6 +59,7 @@ export default function App() {
           <Route path="/login" element={user ? <Navigate to={homeFor(user)} /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to={homeFor(user)} /> : <Register />} />
           <Route path="/" element={<RequireRole roles={['student']}><Menu /></RequireRole>} />
+          <Route path="/orders" element={<RequireRole roles={['student']}><MyOrders /></RequireRole>} />
           <Route path="/orders/:id" element={<RequireRole roles={['student']}><TrackOrder /></RequireRole>} />
           <Route path="/kitchen" element={<RequireRole roles={['staff', 'admin']}><Kitchen /></RequireRole>} />
           <Route path="*" element={<Navigate to={homeFor(user)} replace />} />

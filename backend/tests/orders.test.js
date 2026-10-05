@@ -103,3 +103,16 @@ describe('CE-4 kitchen queue and CE-8 order tracking', () => {
     expect((await t.api.patch(`/api/orders/${order.id}/cancel`).set(t.student)).status).toBe(409);
   });
 });
+
+describe('CE-9 order history', () => {
+  test('a student sees only their own orders, newest first', async () => {
+    const t = await setup();
+    await placeOrder(t, [{ menuItemId: 1, qty: 1 }]);
+    await placeOrder(t, [{ menuItemId: 2, qty: 1 }]);
+    await placeOrder(t, [{ menuItemId: 3, qty: 1 }], t.otherStudent);
+
+    const res = await t.api.get('/api/orders/mine').set(t.student);
+    expect(res.body).toHaveLength(2);
+    expect(res.body[0].id).toBeGreaterThan(res.body[1].id);
+  });
+});
