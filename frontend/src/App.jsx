@@ -6,6 +6,7 @@ import Menu from './pages/Menu'
 import MyOrders from './pages/MyOrders'
 import TrackOrder from './pages/TrackOrder'
 import Kitchen from './pages/Kitchen'
+import AdminMenu from './pages/AdminMenu'
 
 const NAV = {
   student: [
@@ -13,7 +14,10 @@ const NAV = {
     ['/orders', 'My orders'],
   ],
   staff: [['/kitchen', 'Kitchen queue']],
-  admin: [['/kitchen', 'Kitchen queue']],
+  admin: [
+    ['/admin/menu', 'Menu'],
+    ['/kitchen', 'Kitchen queue'],
+  ],
 }
 
 function RequireRole({ roles, children }) {
@@ -62,6 +66,7 @@ export default function App() {
           <Route path="/orders" element={<RequireRole roles={['student']}><MyOrders /></RequireRole>} />
           <Route path="/orders/:id" element={<RequireRole roles={['student']}><TrackOrder /></RequireRole>} />
           <Route path="/kitchen" element={<RequireRole roles={['staff', 'admin']}><Kitchen /></RequireRole>} />
+          <Route path="/admin/menu" element={<RequireRole roles={['admin']}><AdminMenu /></RequireRole>} />
           <Route path="*" element={<Navigate to={homeFor(user)} replace />} />
         </Routes>
       </main>
