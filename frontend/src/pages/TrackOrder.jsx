@@ -35,8 +35,8 @@ export default function TrackOrder() {
 
   return (
     <div className="page narrow">
-      <Link to="/" className="muted">
-        ← Back to menu
+      <Link to="/orders" className="muted">
+        ← All orders
       </Link>
       <div className={`card token-card ${order.status === 'READY' ? 'is-ready' : ''}`}>
         <span className="muted">Your token</span>
