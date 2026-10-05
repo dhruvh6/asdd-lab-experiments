@@ -15,7 +15,8 @@ pipeline {
     environment {
         // Jenkins runs as a launchd service, which starts with a minimal PATH.
         PATH = "/opt/homebrew/bin:/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        APP_VERSION = "1.0.${env.BUILD_NUMBER}"
+        // main builds are releases (1.0.<n>); other branches get their own tags so they never overwrite a release.
+        APP_VERSION = "${env.BRANCH_NAME == 'main' ? '1.0.' + env.BUILD_NUMBER : '0.0.' + env.BUILD_NUMBER + '-' + env.BRANCH_NAME.toLowerCase().replaceAll('[^a-z0-9]+', '-')}"
         COMPOSE_PROJECT_NAME = 'campuseats'
     }
 
