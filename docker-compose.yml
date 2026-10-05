@@ -105,6 +105,19 @@ services:
       - prometheus
     restart: unless-stopped
 
+  nagios:
+    image: jasonrivers/nagios:latest
+    platform: linux/amd64        # image is published for amd64 only; runs emulated on Apple Silicon
+    container_name: campuseats-nagios
+    environment:
+      NAGIOSADMIN_USER: nagiosadmin
+      NAGIOSADMIN_PASS: ${NAGIOS_PASSWORD:-campuseats}
+    ports:
+      - "8090:80"
+    volumes:
+      - ./monitoring/nagios:/opt/nagios/etc/monitor:ro
+    restart: unless-stopped
+
 volumes:
   mysql-data:
   prometheus-data:
