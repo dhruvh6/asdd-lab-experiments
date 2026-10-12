@@ -34,8 +34,10 @@ exp-NN-<topic>/
 
 For experiments 5, 6 and 10 the original repositories were merged in with
 `git subtree`, so their original commits (dates, authors, messages) are part of
-this repository's history. To see them:
+this repository's history. Each imported history is tagged:
 
 ```bash
-git log --format='%h %ad %an  %s' --date=iso -- exp-06-jira-agile-devops/source
+git log --format='%h %ad %an  %s' --date=iso exp05-original   # Exp 5, 29 Aug 2026
+git log --format='%h %ad %an  %s' --date=iso exp06-original   # Exp 6, 26 Aug - 1 Sep 2026
+git log --format='%h %ad %an  %s' --date=iso exp10-original   # Exp 10
 ```

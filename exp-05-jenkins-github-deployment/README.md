@@ -14,7 +14,7 @@
 imported with its commit history (29 Aug 2026):
 
 ```
-git log --format='%h %ad  %s' --date=iso -- exp-05-jenkins-github-deployment/source
+git log --format='%h %ad  %s' --date=iso exp05-original
 ```
 
 ## Run

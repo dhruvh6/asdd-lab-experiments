@@ -16,5 +16,5 @@ Docker Compose → Jenkins CI/CD → Prometheus, Grafana and Nagios monitoring.
 | `screenshots/` | App, Jira, Grafana, Prometheus and Nagios screenshots + diagrams |
 | `Exp10_MiniProject_Report.pdf` | Report |
 
-`source/` is the project repository imported with its commit history. See
-`source/README.md` for setup and run instructions.
+`source/` is the project repository imported with its commit history
+(`git log exp10-original`). See `source/README.md` for setup and run instructions.

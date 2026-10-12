@@ -21,7 +21,7 @@ imported with its full commit history (26 Aug – 1 Sep 2026). Each story was bu
 was merged through a reviewed pull request:
 
 ```
-git log --format='%h %ad %an  %s' --date=short -- exp-06-jira-agile-devops/source
+git log --format='%h %ad %an  %s' --date=short exp06-original
 ```
 
 ## Run
