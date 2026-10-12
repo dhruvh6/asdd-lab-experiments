@@ -1,0 +1,6 @@
+# /opt/nagios/etc/nagios.cfg  (inside the nagios4 container)
+# The servers directory was commented out in this image - enabled so that
+# servers/mac_host_001.cfg is loaded.
+
+-#cfg_dir=/opt/nagios/etc/servers
++cfg_dir=/opt/nagios/etc/servers
