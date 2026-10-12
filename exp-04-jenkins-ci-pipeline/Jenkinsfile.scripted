@@ -1,0 +1,10 @@
+// Jenkins job: Experiment-4-Scripted  (Pipeline script, Groovy sandbox)
+node {
+    stage('Start') {
+        echo 'Initializing my first pipeline...'
+    }
+
+    stage('Greeting') {
+        echo 'Hello, Jenkins!'
+    }
+}

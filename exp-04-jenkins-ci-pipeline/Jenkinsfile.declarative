@@ -1,0 +1,27 @@
+// Jenkins job: Experiment-4-Declarative  (Pipeline script)
+pipeline {
+    agent any
+
+    stages {
+        stage('Preparation') {
+            steps {
+                echo 'Cleaning up and setting up the workspace...'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Compiling the source code...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Executing unit and integration tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application to the staging environment...'
+            }
+        }
+    }
+}
