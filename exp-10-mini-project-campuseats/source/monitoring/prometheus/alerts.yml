@@ -1,0 +1,37 @@
+groups:
+  - name: campuseats
+    rules:
+      - alert: CampusEatsApiDown
+        expr: up{job="campuseats-api"} == 0
+        for: 15s
+        labels:
+          severity: critical
+        annotations:
+          summary: CampusEats API is not responding to Prometheus scrapes
+
+      - alert: HighServerErrorRate
+        expr: |
+          sum(rate(campuseats_http_requests_total{status=~"5.."}[1m]))
+            / clamp_min(sum(rate(campuseats_http_requests_total[1m])), 0.001) > 0.05
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: More than 5% of API requests are failing with a 5xx error
+
+      - alert: SlowApiResponses
+        expr: |
+          histogram_quantile(0.95, sum by (le) (rate(campuseats_http_request_duration_seconds_bucket[1m]))) > 0.5
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: 95th percentile API response time is above 500 ms
+
+      - alert: KitchenBacklog
+        expr: campuseats_orders_in_queue{status="PLACED"} > 10
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: More than 10 orders are waiting for the kitchen to start them
